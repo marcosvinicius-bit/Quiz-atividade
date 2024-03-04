@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz atividade</title>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <header>
+            <h1 class="text-flicker-out-glow">Quiz de Perguntas e Respostas</h1>
+        </header>
+        <div id="pergunta"></div>
+        <div id="opcoes"></div>
+        <div id="resultado"></div>
+    </div>
+
+   <img src="logo.png" alt="fnaf" align="left" width="460px">
+   <img class="img1" src="original.jpg" alt="img1">
+<script>
+
+
+    const perguntas = [
+        {
+            pergunta: "Quem criou o Fnaf?",
+            opcoes: ["William Afton", "Scott Cowton", "Henry", "Charlotte"],
+            resposta: "Scott Cowton"
+        },
+        {
+            pergunta: "Quantos animatronics tem no jogo 1 da franquia?",
+            opcoes: ["11", "15", "5", "6", "8"],
+            resposta: "5"
+        },
+
+        {
+            pergunta: "Quantos Fnaf existem atualmente conforme nos jogos?",
+            opcoes: ["6", "7", "11", "8"],
+            resposta: "11"
+        },
+
+        {
+            pergunta: "Qual foi o primeiro animatronic da franquia?",
+            opcoes: ["SpringTrap", "Freddy", "Whitered Chica", "Puppet"],
+            resposta: "SpringTrap"
+        }
+        // Adicione mais perguntas aqui
+    ];
+
+    const perguntaElemento = document.getElementById("pergunta");
+    const opcoesElemento = document.getElementById("opcoes");
+    const resultadoElemento = document.getElementById("resultado");
+
+    let indicePerguntaAtual = 0;
+
+    function carregarPergunta() {
+        const perguntaAtual = perguntas[indicePerguntaAtual];
+        perguntaElemento.textContent = perguntaAtual.pergunta;
+
+        opcoesElemento.innerHTML = "";
+        perguntaAtual.opcoes.forEach(opcao => {
+            const botao = document.createElement("button");
+            botao.textContent = opcao;
+            botao.addEventListener("click", () => verificarResposta(opcao));
+            opcoesElemento.appendChild(botao);
+        });
+    }
+
+    function verificarResposta(respostaSelecionada) {
+        const perguntaAtual = perguntas[indicePerguntaAtual];
+        if (respostaSelecionada === perguntaAtual.resposta) {
+            resultadoElemento.textContent = "Resposta correta!";
+            resultadoElemento.className = "correto";
+        } else {
+            resultadoElemento.textContent = "Resposta incorreta. A resposta correta é: " + perguntaAtual.resposta;
+            resultadoElemento.className = "incorreto";
+        }
+
+        // Avança para a próxima pergunta ou finaliza o quiz
+        indicePerguntaAtual++;
+        if (indicePerguntaAtual < perguntas.length) {
+            setTimeout(carregarPergunta, 2000); // Carrega a próxima pergunta após 2 segundos
+        } else {
+            resultadoElemento.textContent = "Quiz concluído!!!";
+            resultadoElemento.className = "";
+        }
+    }
+
+    // Carregar a primeira pergunta quando a página carrega
+    carregarPergunta();
+</script>
+
+<footer>
+    Criado por: Marcos Vinicius| <img class="git"
+        src="https://bitperfect.at/assets/blog-images/Headerbild-Was-ist-GitHub-v2.png" alt="">
+
+    GitHub: marcosvinicius-bit | Instagram: MarcosBR &reg;
+</footer>
+
+</body>
+</html>
